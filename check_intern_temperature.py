@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #-----------------------------------------------------------------------
-# Nagios check External Temperature in Volt POP Protect Devices
+# Nagios check Internal Temperature in Volt POP Protect Devices
 # Written by Jorge Luiz Taioque
 # jorgeluiztaioque [at] gmail [dot] com
 #
@@ -15,8 +15,8 @@ import sys
 def main(argv):
 	if not argv:
 		print ('Uso:')
-		print ('./check_external_temperature.py [ipaddress] [tempratura_warn] [temperatura_maxima]')
-		print ('././check_external_temperature.py 10.0.0.1 30 40')
+		print ('./check_intern_temperature.py [ipaddress] [tempratura_warn] [temperatura_maxima]')
+		print ('././check_intern_temperature.py 10.0.0.1 30 40')
 	else:
 
 		ip = sys.argv[1]
@@ -29,20 +29,20 @@ def main(argv):
 
 		snmpSession = Session(hostname=ip, community='public', version=2)
 
-		mibExtTemp = ".1.3.6.1.4.1.17095.1.3.10"
+		mibIntTemp = ".1.3.6.1.4.1.17095.1.3.9"
 
-		status = snmpSession.get(mibExtTemp+'.0').value
+		status = snmpSession.get(mibIntTemp+'.0').value
 
 		sts = int(status)
 
 		if sts < tempMidle:
-			print ("Temp_Sensor_OK="+status)
+			print ("Temp_OK="+status)
 			sys.exit(0)
 		if sts >= (tempMidle) and sts < tempHigh:
-			print ("Temp_Sensor_Warning="+status)
+			print ("Temp_Warning="+status)
 			sys.exit(1)
 		if sts >= tempHigh and sts < 254:
-			print ("Temp_Sensor_High="+status)
+			print ("Temp_High="+status)
 			sys.exit(2)
 		if sts == 0:
 			print ("External Sensor is not present")
@@ -50,5 +50,6 @@ def main(argv):
 		if sts >= 125:
 			print ("External Sensor is not present")
 			sys.exit(2)
+
 if __name__ =='__main__':
     main(sys.argv[1:])

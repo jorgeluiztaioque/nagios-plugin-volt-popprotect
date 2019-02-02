@@ -12,42 +12,52 @@ __version__= 1.0
 from easysnmp import Session
 import sys
 
-ip = sys.argv[1]
-voltageLow = sys.argv[2]
-voltageHigh = sys.argv[3]
+def main(argv):
+	if not argv:
+		print ('Uso:')
+		print ('./check_imput_voltage.py [ipaddress] [voltagem_minima] [voltagem_maxima]')
+		print ('./check_imput_voltage.py 10.0.0.1 11 14')
+	else:
 
-voltageMargin = 3
+		ip = sys.argv[1]
+		voltageLow = sys.argv[2]
+		voltageHigh = sys.argv[3]
 
-#Alarm only PON ports that has more than this value (variable [alarm] value)
-voltageLow = float(voltageLow)
-voltageHigh = float(voltageHigh)
+		voltageMargin = 3
 
-snmpSession = Session(hostname=ip, community='public', version=2)
+		#Alarm only PON ports that has more than this value (variable [alarm] value)
+		voltageLow = float(voltageLow)
+		voltageHigh = float(voltageHigh)
 
-mibImputVoltage = ".1.3.6.1.4.1.17095.1.3.11"
+		snmpSession = Session(hostname=ip, community='public', version=2)
 
-status = snmpSession.get(mibImputVoltage+'.0').value
+		mibImputVoltage = ".1.3.6.1.4.1.17095.1.3.11"
 
-sts = (float(status)/10)
+		status = snmpSession.get(mibImputVoltage+'.0').value
 
-if sts == 0:
-	print ("No imput voltage")
-	sys.exit(2)
-if sts >= 120:
-	print ("No imput voltage")
-	sys.exit(2)
-if sts >= voltageLow and sts <= voltageHigh:
-	print ("Voltage OK= "+str(sts))
-	sys.exit(0)
-if sts >= (voltageLow-voltageMargin) and sts < voltageLow:
-	print ("Voltage Warning low= "+str(sts))
-	sys.exit(1)
-if sts > voltageHigh and sts < (voltageHigh+voltageMargin):
-	print ("Voltage Warning high= "+str(sts))
-	sys.exit(1)
-if sts < (voltageLow-voltageMargin):
-	print ("Voltage Low= "+str(sts))
-	sys.exit(2)
-if sts > (voltageHigh+voltageMargin):
-	print ("Voltage High= "+str(sts))
-	sys.exit(2)
+		sts = (float(status)/10)
+
+		if sts == 0:
+			print ("No imput voltage")
+			sys.exit(2)
+		if sts >= 120:
+			print ("No imput voltage")
+			sys.exit(2)
+		if sts >= voltageLow and sts <= voltageHigh:
+			print ("Voltage OK= "+str(sts))
+			sys.exit(0)
+		if sts >= (voltageLow-voltageMargin) and sts < voltageLow:
+			print ("Voltage Warning low= "+str(sts))
+			sys.exit(1)
+		if sts > voltageHigh and sts < (voltageHigh+voltageMargin):
+			print ("Voltage Warning high= "+str(sts))
+			sys.exit(1)
+		if sts < (voltageLow-voltageMargin):
+			print ("Voltage Low= "+str(sts))
+			sys.exit(2)
+		if sts > (voltageHigh+voltageMargin):
+			print ("Voltage High= "+str(sts))
+			sys.exit(2)
+
+if __name__ =='__main__':
+    main(sys.argv[1:])

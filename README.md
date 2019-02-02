@@ -27,9 +27,10 @@ pip3 install easysnmp
 Exemplo: <br>
 ./check_nome_plugin 10.10.10.1 10 <br>
 Apenas utilize argumentos se é necesário para o plugin <br>
+Em caso de duvidas execute o plugin e siga as informações de uso.<br>
 <br>
 Para configurar no nagios service.cfg use: <br>
-check_command:	check_pon_fiberhome!10.10.10.1!1 <br>
+check_command:	check_nome_plugin!10.10.10.1!1 #Argumentos de ouver<br>
 
 
 ### Configuração no nagios
