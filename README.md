@@ -8,7 +8,7 @@ Os plugins para nagios realizam leitura nos equipamentos Volt POPProtect para v√
 * Temperatura Interna
 * Temperatura do sensor externo
 
-![http://www.volt.ind.br/popprotect.php](https://github.com/jorgeluiztaioque/lxd-forward/blob/master/lxd.png?raw=true)
+![http://www.volt.ind.br/popprotect.php](https://raw.githubusercontent.com/jorgeluiztaioque/nagios-plugin-volt-popprotect/master/image/popprotect.png)
 ---
 #### Nagios check Volt POPProtect <br>
 Written by Jorge Luiz Taioque <br>
