@@ -1,15 +1,16 @@
 # Nagios check Volt POP Protect
 
-This plugin can test all Fiberhome pon slot with 8 or 16 PONs if PON link status is UP or DOWN
-
-The plugin check if in all PONs of a specific SLOT has customers, if a PON port have one or more customers and PON status is DOWN one alarm is generated.
+Os plugins para nagios realizam leitura nos equipamentos Volt POPProtect para vários sensores como:
+* Alarme ativo
+* Entrada AC
+* Voltagem de Entrada
+* Voltagem das Baterias
+* Temperatura Interna
+* Temperatura do sensor externo
 
 ---
-#### Nagios check PON in OLT Fiberhome <br>
+#### Nagios check Volt POPProtect <br>
 Written by Jorge Luiz Taioque <br>
-This plugin check status of a PON Slot connected in a specific OLT  <br>
-and return if these PON operational state is UP or DOWN <br>
-
 
 ### Dependencias
 <pre>
